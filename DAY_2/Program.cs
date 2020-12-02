@@ -88,31 +88,13 @@ public class Employee1
             return DeptNo;
         }
     }
-    public Employee1()
-    {
-        count++;
-        EmpNo = count;
-    }
-    public Employee1(string NAME, decimal BASIC, short DEPTNO)
+    public Employee1(string NAME="Amol", decimal BASIC=20000, short DEPTNO=10)
     {
         count++;
         EmpNo = count;
         this.NAME = NAME;
         this.BASIC = BASIC;
         this.DEPTNO = DEPTNO;
-    }
-    public Employee1(string NAME, decimal BASIC)
-    {
-        count++;
-        EmpNo = count;
-        this.NAME = NAME;
-        this.BASIC = BASIC;
-    }
-    public Employee1(string NAME)
-    {
-        count++;
-        EmpNo = count;
-        this.NAME = NAME;
     }
     public decimal GetNetSalary()
     {
