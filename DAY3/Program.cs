@@ -10,9 +10,10 @@ namespace InheritanceAssignment
     {
         static void Main(string[] args)
         {
-            Manager m = new Manager("shubham", 10, 15000, "Software");
-            GeneralManager gm = new GeneralManager("pratik", 20, 55000, "logistics", "promoted");
             CEO c = new CEO("Rahul", 30, 95000);
+            Manager m = new Manager("shubham", 10, 45000, "Software");
+            GeneralManager gm = new GeneralManager("pratik", 20, 25000, "logistics", "promoted");
+            
 
             Console.WriteLine(c.EMPNO+" "+c.NAME+" "+c.DEPTNO+" "+c.BASIC+" "+c.CalcNetSalary());
             Console.WriteLine(m.EMPNO + " " + m.NAME + " " + m.DEPTNO + " " + m.BASIC + " " +m.DESGN+" "+m.CalcNetSalary());
@@ -68,9 +69,14 @@ namespace InheritanceAssignment
         }
 
         protected decimal Basic;
+        public abstract decimal BASIC
+        {
+            set;
+            get;
+        }
         public abstract decimal CalcNetSalary();
 
-        public Employee(string NAME = "NoName", short DEPTNO = 10)
+        public Employee(short DEPTNO = 10,string NAME = "NoName")
         {
             count++;
             EmpNo = count;
@@ -98,11 +104,11 @@ namespace InheritanceAssignment
 
         }
 
-        public decimal BASIC
+        public override decimal BASIC
         {
             set
             {
-                if (value >=10000 && value <= 20000)
+                if (value >=40000 && value <= 60000)
                     Basic = value;
                 else
                     Console.WriteLine("Invalid salary for Manager");
@@ -114,15 +120,15 @@ namespace InheritanceAssignment
             }
         }
 
-        public Manager(string NAME, short DEPTNO, decimal BASIC, string DESGN="NoDesignation") : base(NAME,DEPTNO)
+        public Manager(string NAME, short DEPTNO, decimal BASIC, string DESGN="NoDesignation") : base(DEPTNO, NAME)
         {
             this.DESGN = DESGN;
             this.BASIC = BASIC;
         }
 
-        public Manager(string NAME, short DEPTNO) : base(NAME, DEPTNO)
+        public Manager(string NAME, short DEPTNO,string DESGN = "NoDesignation") : base(DEPTNO, NAME)
         {
-
+            this.DESGN = DESGN;
         }
 
         public override decimal CalcNetSalary()
@@ -151,7 +157,7 @@ namespace InheritanceAssignment
         {
             set
             {
-                if (value >= 41000 && value <= 60000)
+                if (value >= 20000 && value <= 39000)
                     Basic = value;
                 else
                     Console.WriteLine("Invalid salary for General Manager");
@@ -162,11 +168,10 @@ namespace InheritanceAssignment
                 return Basic;
             }
         }
-        public GeneralManager(string NAME, short DEPTNO, decimal BASIC,string DESGN,string PERKS="NoPerks") : base(NAME,DEPTNO)
+        public GeneralManager(string NAME, short DEPTNO, decimal BASIC,string DESGN,string PERKS="NoPerks") : base(NAME,DEPTNO,DESGN)
         {
             this.PERKS = PERKS;
             this.BASIC = BASIC;
-
         }
 
         public override decimal CalcNetSalary()
@@ -178,7 +183,7 @@ namespace InheritanceAssignment
     class CEO:Employee
     {
 
-        public decimal BASIC
+        public override decimal BASIC
         {
             set
             {
@@ -194,7 +199,7 @@ namespace InheritanceAssignment
             }
         }
 
-        public CEO(string NAME, short DEPTNO, decimal BASIC) : base(NAME, DEPTNO)
+        public CEO(string NAME, short DEPTNO, decimal BASIC) : base(DEPTNO,NAME)
         {
             this.BASIC = BASIC;
         }
